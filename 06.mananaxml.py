@@ -6,9 +6,12 @@ xmlresp = requests.get(xmlurl)
 if xmlresp.ok :
     print(xmlresp.text)
 root = ElementTree.fromstring(xmlresp.content)
-print(dir(root))
 items = root.findall('item')
 print(type(root))
+for item in items:
+    for data in item:
+        if data.tag=='name' and 'USD' in data.text:
+            print(item[2].text)
 
 ''''
 print(len(items))
